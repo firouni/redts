@@ -1,29 +1,29 @@
 import React from "react";
-import { DeleteTodo } from "../redux/todo";
-import {ToggleTodo} from "../redux/todo"
 import { useDispatch } from "react-redux";
+import { Delete } from "../redux/todo";
+import {Toggle} from "../redux/todo"
 
 
 const TodoCard = ({minitodo}) => {
-    const dispatch=useDispatch()
+    const dispatch=useDispatch();
     const handledelete=(id)=>{
-        dispatch(DeleteTodo (id))
+        dispatch(Delete (id))
     }
     const handleToggle=(id)=>{
-        dispatch(ToggleTodo (id))
+        dispatch(Toggle (id))
     }
-  return (
+    return (
     <div>
         <ul>
             <li>
-                {minitodo.text}
+                {minitodo.description}
             </li>
+            
             <button onClick={()=>handledelete(minitodo.id)} >delete</button>
             <button onClick={()=>handleToggle(minitodo.id)} >not yet</button>
         </ul>
-      
     </div>
-  )
+    )
 }
 
 export default TodoCard

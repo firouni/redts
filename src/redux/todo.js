@@ -1,35 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
-const TodoSlice = createSlice ({
-    name : 'todos',
-    initialState :[
-    {text : 'Read a book ' , id :uuidv4() , isDone : false},
-    {text : 'Morning Walk ' , id : uuidv4() , isDone : false},
-    {text : 'Finish the assignment ' , id :uuidv4() , isDone : false},
-    ],
-    //partie fonctionnalité
-
-    reducers : {
-        //fonction add a new todo 
-        Add  : (state,action)=>{
-          const NEW = {
-            isDone : false , 
-            id : uuidv4() , 
-            text : '',
-        }
-        state.push(NEW)
-        },
-        //fonction toggle
-        ToggleTodo:(state,action) =>{
-          return (state.map ((el) => el.id === action.payload ? {...el,isDone : !el.isDone } : el ))
-        },
-        //fonction delete todo
-        DeleteTodo:(state,action) =>{
-          return state.filter((e)=> e.id !== action.payload)
-        }
+const todoSlice = createSlice({
+  name:'todos',
+  initialState:[{
+    id: uuidv4(),
+    description: "n9oum 7H",
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    description: "noftor ftour sbé7",
+    isDone: false,
+  },
+  {
+    id: uuidv4(),
+    description: "némchi na9ra",
+    isDone: false,
+  }],
+  reducers:{
+    //add function
+    Add:(state,action)=>{
+      const newTask ={
+        id: uuidv4(),
+        description: action.payload,
+        isDone: false,
+      }
+      state.push (newTask)
+    },
+    //delete function
+    Delete:(state,action)=>{
+      return state.filter ((e)=> e.id !== action.payload)
+    },
+    //toggle function
+    Toggle:(state,action)=>{
+      return state.map ((e)=> {
+        if(e.id === action.payload){
+          return {...e, isDone : !e.isDone}
+        }else {return e}
+      })
     }
+  }
 })
 
-export const {Add,ToggleTodo,DeleteTodo} = TodoSlice.actions
-export default TodoSlice.reducer
+export const {Add, Delete, Toggle} = todoSlice.actions
+export default todoSlice.reducer

@@ -1,21 +1,22 @@
-import React from "react";
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import {useDispatch} from 'react-redux'
+import React, {useState} from "react";
+import {useDispatch, useSelector} from 'react-redux'
 import { Add } from "../redux/todo";
+import { Button } from "react-bootstrap";
 
-const AddTodo =()=> {
+const AddTask =()=> {
+    const todo = useSelector((state)=>state.todos)
+    console.log(todo)
     const dispatch=useDispatch()
-    const[input,setInput]=useState('')
+    const[input,setInput]=useState("")
+    console.log(input)
     const Adds =()=>{
         dispatch (Add(input))
-       
     }
     return (
         <div>
-        <input placeholder="enter todo" onChange={(e)=> setInput (e.target.value)} />
-        <button onClick={Adds} >Add Todo</button>
+        <input placeholder="enter task" onChange={(e)=> setInput (e.target.value)} />
+        <Button variant="success" onClick={Adds} >Add Task</Button>
         </div>
     )
 }
-export default AddTodo
+export default AddTask;

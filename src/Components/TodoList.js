@@ -1,10 +1,10 @@
 import React from 'react'
-import { useSelector } from "react-redux";
 import TodoCard from './TodoCard';
+import { useSelector } from "react-redux";
 
 
 const TodoList = () => {
-    const todos=useSelector(state=>state.todos)
+    const todos = useSelector(state=>state.todos)
     console.log('message',todos)
     return (
     <div>
